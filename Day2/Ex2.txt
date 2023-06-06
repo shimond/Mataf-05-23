@@ -12,3 +12,5 @@
 
 תהנו
 שמעון
+
+https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-7.0
