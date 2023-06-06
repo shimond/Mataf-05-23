@@ -1,4 +1,6 @@
 ﻿using FirstWebApi.Contracts;
+using FirstWebApi.Exceptions;
+using Microsoft.OpenApi.Validations;
 
 namespace FirstWebApi.Services
 {
@@ -19,6 +21,21 @@ namespace FirstWebApi.Services
             var newProduct = p with { Id = lastId + 1 };
             this._list.Add(newProduct);
             return Task.FromResult(newProduct);
+        }
+
+        public Task DeleteProduct(int productId)
+        {
+            var productToDelete = _list.FirstOrDefault(x => x.Id == productId);
+            if (productToDelete != null)
+            {
+                this._list.Remove(productToDelete);
+                return Task.CompletedTask;
+            }
+            else
+            {
+                throw new CrudException("Cannot Delete item", CrudExceptionType.Conflict);
+            }
+
         }
 
         public async Task<List<Product>> GetAllProducts()

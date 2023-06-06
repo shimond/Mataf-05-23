@@ -41,6 +41,13 @@ public class ProductsController : ControllerBase
         return Created("products/" + newProductAfterInsert.Id, newProductAfterInsert);
     }
 
+    [HttpDelete("{id}",Name = nameof(DeleteProduct))]
+    public async Task<IActionResult> DeleteProduct(int id)
+    {
+        await productRepository.DeleteProduct(id);
+        return NoContent();
+    }
+
 }
 
 

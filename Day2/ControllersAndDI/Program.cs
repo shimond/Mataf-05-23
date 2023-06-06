@@ -1,4 +1,5 @@
 using FirstWebApi.Contracts;
+using FirstWebApi.Middlewares;
 using FirstWebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +13,7 @@ builder.Services.AddSingleton<IProductRepository, MockForCourseProductRepository
 //builder.Services.AddTransient<IProductRepository, MockForCourseProductRepository>();
 
 var app = builder.Build();
-
+app.UseCurdErrorHandlerMiddleware();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger(); // CREATE JSON FILE BY CONTROLLERS
